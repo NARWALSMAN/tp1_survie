@@ -1,6 +1,6 @@
 # Kaplan-Meier
 library("survival")
-
+library("survminer")
 ##########
 #PARTIE 1#
 ##########
@@ -13,7 +13,7 @@ status0<-rep(1,21)
 duree<-c(time, time0)
 censure<-c(status,status0)
 groupe<-c(rep(1,length(time)),rep(0,length(time0)))
-
+data_frame<-data.frame(duree,censure,groupe)
 #2 Tracez l’estimateur de Kaplan-Meier
 fit <- survfit(Surv(duree,censure) ~ 1,conf.type="plain")
 plot(fit)
@@ -25,6 +25,11 @@ summary(fit)
 fit.groupe <- survfit(Surv(duree,censure) ~ groupe,conf.type="plain")
 plot(fit.groupe)
 summary(fit.groupe)
+
+#5 
+ggsurvplot(fit.groupe, data = data_frame, fun = "cumhaz", 
+           conf.int = TRUE, pval = TRUE, risk.table = TRUE,
+           ggtheme = theme_minimal())
 
 ##########
 #PARTIE 2#
