@@ -1,6 +1,10 @@
 # Kaplan-Meier
 library("survival")
 
+##########
+#PARTIE 1#
+##########
+
 #1 Entrez les donnees de Freireich
 time<- c(6,6,6,6,7,9,10,10,11,13,16,17,19,20,22,23,25,32,32,34,35)
 status<-c(1,1,1,0,1,0,1,0,0,1,1,0,0,0,1,1,0,0,0,0,0)
@@ -21,3 +25,24 @@ summary(fit)
 fit.groupe <- survfit(Surv(duree,censure) ~ groupe,conf.type="plain")
 plot(fit.groupe)
 summary(fit.groupe)
+
+##########
+#PARTIE 2#
+##########
+
+#1 etude descriptive
+summary(dataset$treat)
+summary(dataset$renal)
+
+#2 etude de survie
+fit.treat<-survfit(Surv(dataset$dur) ~ dataset$treat)
+summary(fit.treat)
+plot(fit.treat)
+
+fit.renal<-survfit(Surv(dataset$dur) ~ dataset$renal)
+summary(fit.renal)
+plot(fit.renal)
+
+fit.status<-survfit(Surv(dataset$dur) ~ dataset$status)
+summary(fit.status)
+plot(fit.status)
