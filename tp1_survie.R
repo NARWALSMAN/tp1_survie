@@ -40,6 +40,10 @@ summary(dataset$treat)
 summary(dataset$renal)
 
 #2 etude de survie
+fit.tot <- survfit(Surv(dataset$dur,dataset$status) ~ 1,conf.type="plain")
+summary(fit.tot)
+plot(fit.tot)
+
 fit.treat<-survfit(Surv(dataset$dur) ~ dataset$treat)
 summary(fit.treat)
 plot(fit.treat)
