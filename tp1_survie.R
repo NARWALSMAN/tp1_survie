@@ -14,6 +14,10 @@ duree<-c(time, time0)
 censure<-c(status,status0)
 groupe<-c(rep(1,length(time)),rep(0,length(time0)))
 data_frame<-data.frame(duree,censure,groupe)
+
+par(mfrow=c(1,2))
+
+
 #2 Tracez l’estimateur de Kaplan-Meier
 fit <- survfit(Surv(duree,censure) ~ 1,conf.type="plain")
 plot(fit)
