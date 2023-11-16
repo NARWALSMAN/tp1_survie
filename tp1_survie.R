@@ -40,18 +40,20 @@ summary(dataset$treat)
 summary(dataset$renal)
 
 #2 etude de survie
+par(mfrow=c(2,2))
+
 fit.tot <- survfit(Surv(dataset$dur,dataset$status) ~ 1,conf.type="plain")
 summary(fit.tot)
-plot(fit.tot)
+plot(fit.tot,main="graphique globale",col="blue")
 
 fit.treat<-survfit(Surv(dataset$dur) ~ dataset$treat)
 summary(fit.treat)
-plot(fit.treat)
+plot(fit.treat,main="graphique treat",col="red")
 
 fit.renal<-survfit(Surv(dataset$dur) ~ dataset$renal)
 summary(fit.renal)
-plot(fit.renal)
+plot(fit.renal,main="graphique renal",col="purple")
 
-fit.status<-survfit(Surv(dataset$dur) ~ dataset$status)
+fit.status<-survfit(Surv(dataset$dur) ~ (dataset$renal+dataset$treat))
 summary(fit.status)
-plot(fit.status)
+plot(fit.status, main="graphique combiner",col="green")
